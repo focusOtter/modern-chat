@@ -17,12 +17,15 @@ import {
 	useTheme,
 	View,
 } from '@aws-amplify/ui-react'
-import Link from 'next/link'
+
+import { useRouter } from 'next/router'
 
 import { useEffect, useState } from 'react'
 import { mockMessages, mockChannels } from '../../mockdata'
 
 export default function Home({ currentChannel, channels }) {
+	console.log({ currentChannel })
+	console.log({ channels })
 	const { tokens } = useTheme()
 	const [totalMessages, setTotalMessages] = useState([])
 	const handleMessageSend = (newMessage) => {
@@ -64,6 +67,7 @@ export default function Home({ currentChannel, channels }) {
 }
 
 const NotificationHeader = ({ channels }) => {
+	const router = useRouter()
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const variation = useBreakpointValue({
 		base: 'isMobile',
@@ -72,6 +76,9 @@ const NotificationHeader = ({ channels }) => {
 	const toggleMenu = (channelId) => {
 		setIsMenuOpen(false)
 		//naviate to new channel
+
+		router.push(`/channels/${channelId}`)
+		console.log('registered')
 	}
 
 	const NotificationDisplay = ({ channels }) => {
@@ -114,11 +121,7 @@ const ChannelList = ({ handleMenuToggle, channels }) => {
 								handleMenuToggle(channel.channelId)
 							}}
 						>
-							<TableCell>
-								<Link href={`/channels/${channel.channelId}`}>
-									{channel.name}
-								</Link>
-							</TableCell>
+							<TableCell>{channel.name}</TableCell>
 						</TableRow>
 					))}
 				</TableBody>
