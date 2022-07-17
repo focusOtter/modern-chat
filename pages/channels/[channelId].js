@@ -23,7 +23,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { mockMessages, mockChannels } from '../../mockdata'
 
-export default function Home({ currentChannel, channels }) {
+export default function Home({ currentChannel = {}, channels = [] }) {
 	console.log({ currentChannel })
 	console.log({ channels })
 	const { tokens } = useTheme()
@@ -66,7 +66,7 @@ export default function Home({ currentChannel, channels }) {
 	)
 }
 
-const NotificationHeader = ({ channels }) => {
+const NotificationHeader = ({ channels = [] }) => {
 	const router = useRouter()
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const variation = useBreakpointValue({
@@ -81,7 +81,7 @@ const NotificationHeader = ({ channels }) => {
 		console.log('registered')
 	}
 
-	const NotificationDisplay = ({ channels }) => {
+	const NotificationDisplay = ({ channels = [] }) => {
 		if (variation === 'isMobile') {
 			return (
 				<Flex>
@@ -103,7 +103,7 @@ const NotificationHeader = ({ channels }) => {
 	return <NotificationDisplay channels={channels} />
 }
 
-const ChannelList = ({ handleMenuToggle, channels }) => {
+const ChannelList = ({ handleMenuToggle, channels = [] }) => {
 	console.log('the channels', channels)
 	return (
 		<View>
@@ -130,7 +130,7 @@ const ChannelList = ({ handleMenuToggle, channels }) => {
 	)
 }
 
-const MessageList = ({ messages }) => {
+const MessageList = ({ messages = [] }) => {
 	return (
 		<Flex
 			flex="1"
@@ -146,7 +146,7 @@ const MessageList = ({ messages }) => {
 	)
 }
 
-const MessageItem = ({ msg }) => {
+const MessageItem = ({ msg = {} }) => {
 	const { tokens } = useTheme()
 	const myUsername = 'mtliendo'
 	const isMyMsg = msg.username === myUsername
@@ -261,6 +261,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+	console.log('these are the params', params)
 	const channel = mockChannels.find(
 		(mckChnl) => mckChnl.channelId === params.channelId
 	)
