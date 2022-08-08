@@ -30,4 +30,6 @@ function Home({ signOut }) {
 	)
 }
 
-export default withAuthenticator(Home)
+export default withAuthenticator(Home, {
+	signUpAttributes: ['email', 'given_name', 'family_name'],
+})
