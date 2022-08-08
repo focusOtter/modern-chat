@@ -1,7 +1,7 @@
 import { Flex } from '@aws-amplify/ui-react'
 import { MessageItem } from './index'
 
-export const MessageList = ({ messages = [] }) => {
+export const MessageList = ({ messages = [], myUsername }) => {
 	return (
 		<Flex
 			flex="1"
@@ -11,7 +11,7 @@ export const MessageList = ({ messages = [] }) => {
 			padding="5px"
 		>
 			{messages.map((msg) => (
-				<MessageItem key={msg.id} msg={msg} />
+				<MessageItem key={msg.id} msg={msg} myUsername={myUsername} />
 			))}
 		</Flex>
 	)

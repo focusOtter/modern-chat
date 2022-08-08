@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-modernchat-dev-230556-authRole",
+      "UnauthRoleArn": "arn:aws:iam::936471194299:role/amplify-modernchat-dev-230556-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::936471194299:role/amplify-modernchat-dev-230556-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-modernchat-dev-230556-deployment",
+      "UnauthRoleName": "amplify-modernchat-dev-230556-unauthRole",
+      "StackName": "amplify-modernchat-dev-230556",
+      "StackId": "arn:aws:cloudformation:us-east-1:936471194299:stack/amplify-modernchat-dev-230556/68187cb0-16cf-11ed-9db1-0a642f9f4219",
+      "AmplifyAppId": "d1ndk7comqjhip"
+    }
+  }
+}

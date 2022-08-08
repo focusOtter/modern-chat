@@ -7,25 +7,25 @@ import {
 	View,
 } from '@aws-amplify/ui-react'
 
-export const ChannelList = ({ handleMenuToggle, channels = [] }) => {
-	console.log('the channels', channels)
+export const RoomList = ({ handleMenuToggle, rooms = [] }) => {
 	return (
 		<View>
 			<Table variation="striped" highlightOnHover>
 				<TableHead>
 					<TableRow>
-						<TableCell as="th">Channels</TableCell>
+						<TableCell as="th">Application Rooms</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{channels.map((channel) => (
+					{rooms.map((room) => (
 						<TableRow
-							key={channel.channelId}
+							key={room.id}
 							onClick={() => {
-								handleMenuToggle(channel.channelId)
+								console.log(room.id)
+								handleMenuToggle(room.id)
 							}}
 						>
-							<TableCell>{channel.name}</TableCell>
+							<TableCell>{room.name}</TableCell>
 						</TableRow>
 					))}
 				</TableBody>

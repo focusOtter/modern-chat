@@ -1,22 +1,20 @@
 import { Flex, Menu, useBreakpointValue } from '@aws-amplify/ui-react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { ChannelList } from '../ChannelList'
+import { RoomList } from '../RoomList'
 
-export const ConversationBar = ({ channels = [] }) => {
-	const router = useRouter()
+export const ConversationBar = ({ rooms = [], onRoomChange }) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const variation = useBreakpointValue({
 		base: 'isMobile',
 		medium: 'isTabletOrHigher',
 	})
-	const toggleMenu = (channelId) => {
+	const toggleMenu = (roomId) => {
 		setIsMenuOpen(false)
-		//naviate to new channel
-		router.push(`/channels/${channelId}`)
+		onRoomChange(roomId)
 	}
 
-	const ConversationDisplay = ({ channels = [] }) => {
+	const ConversationDisplay = ({ rooms = [] }) => {
 		if (variation === 'isMobile') {
 			return (
 				<Flex>
@@ -27,13 +25,13 @@ export const ConversationBar = ({ channels = [] }) => {
 							setIsMenuOpen(!isMenuOpen)
 						}}
 					>
-						<ChannelList channels={channels} handleMenuToggle={toggleMenu} />
+						<RoomList rooms={rooms} handleMenuToggle={toggleMenu} />
 					</Menu>
 				</Flex>
 			)
 		} else if (variation === 'isTabletOrHigher') {
-			return <ChannelList channels={channels} handleMenuToggle={toggleMenu} />
+			return <RoomList rooms={rooms} handleMenuToggle={toggleMenu} />
 		}
 	}
-	return <ConversationDisplay channels={channels} />
+	return <ConversationDisplay rooms={rooms} />
 }

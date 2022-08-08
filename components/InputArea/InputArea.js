@@ -5,11 +5,31 @@ import {
 	TextField,
 	View,
 } from '@aws-amplify/ui-react'
+import { Storage } from 'aws-amplify'
 import { useState } from 'react'
 
 export const InputArea = ({ onMessageSend }) => {
-	const [imageName, setImageName] = useState()
+	const [selectedImage, setSelectedImage] = useState(null)
 	const [messageText, setMessageText] = useState('')
+
+	const uploadFile = async (selectedPic) => {
+		const { key } = await Storage.put(selectedPic.name, selectedPic, {
+			contentType: selectedPic.type,
+		})
+
+		return key
+	}
+
+	const handleFormSubmit = async (e) => {
+		e.preventDefault()
+		let key
+		if (selectedImage) {
+			key = await uploadFile(selectedImage)
+		}
+
+		onMessageSend(messageText, key)
+		setMessageText('')
+	}
 	return (
 		<View
 			style={{
@@ -18,38 +38,26 @@ export const InputArea = ({ onMessageSend }) => {
 			}}
 		>
 			<View>
-				<TextAreaField
-					placeholder="type a message..."
-					rows={2}
-					onChange={(e) => {
-						setMessageText(e.target.value)
-					}}
-					value={messageText}
-				/>
-				<hr />
-				<Flex justifyContent={'space-between'} alignItems={'center'}>
-					<TextField
-						type={'file'}
-						onChange={(e) => setImageName(e.target.files[0].name)}
-					/>
-					<Button
-						variation="primary"
-						onClick={() => {
-							onMessageSend({
-								id: 23,
-								channelId: 'asdf1234',
-								createdAt: 1234445,
-								updatedAt: 2334445,
-								username: 'mtliendo',
-								profilePic: 'https://github.com/mtliendo.png',
-								content: messageText,
-							})
-							setMessageText('')
+				<form onSubmit={handleFormSubmit}>
+					<TextAreaField
+						placeholder="type a message..."
+						rows={2}
+						onChange={(e) => {
+							setMessageText(e.target.value)
 						}}
-					>
-						Send
-					</Button>
-				</Flex>
+						value={messageText}
+					/>
+					<hr />
+					<Flex justifyContent={'space-between'} alignItems={'center'}>
+						<TextField
+							type={'file'}
+							onChange={(e) => setSelectedImage(e.target.files[0])}
+						/>
+						<Button variation="primary" type="submit">
+							Send
+						</Button>
+					</Flex>
+				</form>
 			</View>
 		</View>
 	)
