@@ -1,16 +1,10 @@
-import {
-	Authenticator,
-	Flex,
-	Heading,
-	useTheme,
-	View,
-} from '@aws-amplify/ui-react'
+import { Flex, Heading, useTheme, View } from '@aws-amplify/ui-react'
 import { useEffect, useState } from 'react'
 import { withSSRContext } from 'aws-amplify'
 import { InputArea } from '../../components/InputArea'
 import { MessageList } from '../../components/Message'
 import { ConversationBar } from '../../components/ConversationBar'
-import config from '../../src/sample.aws-exports'
+import config from '../../src/aws-exports'
 import { Amplify, API } from 'aws-amplify'
 import { listMessagesForRoom, listRooms } from '../../src/graphql/queries'
 import { createMessage } from '../../src/graphql/mutations'
