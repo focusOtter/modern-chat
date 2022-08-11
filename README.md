@@ -1,4 +1,5 @@
 # Modern Chat app
+![ezgif-5-31ccf9d033](https://user-images.githubusercontent.com/5106417/184162547-1a3ab9b4-8f91-4a81-be58-f6af35469e02.gif)
 
 ## Steps to get started
 
