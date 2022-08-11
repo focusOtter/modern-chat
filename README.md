@@ -1,7 +1,25 @@
 # Modern Chat app
 ![ezgif-5-31ccf9d033](https://user-images.githubusercontent.com/5106417/184162547-1a3ab9b4-8f91-4a81-be58-f6af35469e02.gif)
 
+## Overview
+This repo is the frontend to building a fullstack chat app. The backend can be found [here](https://github.com/Focus-Otter/chat-cdk-backend).
+
+![image](https://user-images.githubusercontent.com/5106417/184164922-9cbe806e-bb41-4341-89f5-eb419df915b3.png)
+
+## Tech Stack 
+
+* React Framework: NextJS
+* UI Library: AWS Amplify UI primitives
+* API: GraphQL via AWS AppSync
+* File uploads: Sent to Amazon S3
+* Signup/SignIn: Managed with Cognito
+* Backend Binding: amplify-js 
+
+🚨 Note that this project does not create our backend servies via the Amplify CLI, but relies on exported values from the AWS CDK.
+
 ## Steps to get started
+
+Once the backend is deployed, it will output a set of values and store them in a `config.json` file.
 
 1. Run `amplify init`
 2. Run `amplify add codegen --apiId YOUR_APPID`
